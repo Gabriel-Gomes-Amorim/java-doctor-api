@@ -1,0 +1,136 @@
+{
+  "info": {
+    "_postman_id": "9373c28d-d0bf-4395-8a5c-f2cf4ebce016",
+    "name": "DoctorApi",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "24703660"
+  },
+  "item": [
+    {
+      "name": "Create",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Dr. João Silva\",\n  \"email\": \"joao.silva@exemplo.com\",\n  \"telephone\": \"11999999999\",\n  \"crm\": \"CRM123456\",\n  \"specialty\": \"CARDIOLOGY\",\n  \"address\": {\n    \"street\": \"Rua das Flores\",\n    \"neighborhood\": \"Centro\",\n    \"zipCode\": \"01310-100\",\n    \"number\": \"123\",\n    \"complement\": \"Apto 101\",\n    \"city\": \"São Paulo\",\n    \"uf\": \"SP\"\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/doctors",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "doctors"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Dr. João Silva Atualizado\",\n  \"email\": \"joao.silva.novo@exemplo.com\",\n  \"telephone\": \"11888888888\",\n  \"crm\": \"CRM123456\",\n  \"specialty\": \"CARDIOLOGY\",\n  \"address\": {\n    \"street\": \"Av. Paulista\",\n    \"neighborhood\": \"Bela Vista\",\n    \"zipCode\": \"01311-100\",\n    \"number\": \"500\",\n    \"complement\": \"Sala 200\",\n    \"city\": \"São Paulo\",\n    \"uf\": \"SP\"\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/doctors/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "doctors",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/v1/doctors",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "doctors"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get By Id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/v1/doctors/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "doctors",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/v1/doctors/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "doctors",
+            ""
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
