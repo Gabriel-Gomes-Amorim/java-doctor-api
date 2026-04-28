@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: javadoctor_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: javaDoctor
+      POSTGRES_PASSWORD: javaDoctor123
+      POSTGRES_DB: javaDoctor
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U javaDoctor"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - javadoctor_network
+
+volumes:
+  postgres_data:
+
+networks:
+  javadoctor_network:
+    driver: bridge

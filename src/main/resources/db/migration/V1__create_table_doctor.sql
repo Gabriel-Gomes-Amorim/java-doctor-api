@@ -1,0 +1,18 @@
+CREATE TABLE doctors (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    telephone VARCHAR(20) NOT NULL,
+    crm VARCHAR(20) NOT NULL UNIQUE,
+    specialty VARCHAR(50) NOT NULL,
+    street VARCHAR(255),
+    neighborhood VARCHAR(255),
+    zip_code VARCHAR(10),
+    number VARCHAR(10),
+    complement VARCHAR(255),
+    city VARCHAR(255),
+    uf VARCHAR(2),
+    active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
