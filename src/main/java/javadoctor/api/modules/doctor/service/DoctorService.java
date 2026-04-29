@@ -1,11 +1,10 @@
 package javadoctor.api.modules.doctor.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
 
 import jakarta.persistence.EntityNotFoundException;
 import javadoctor.api.modules.doctor.dto.DoctorDto;
@@ -36,10 +35,9 @@ public class DoctorService {
         return modelMapper.map(doctor, DoctorDto.class);
     }
 
-    public List<DoctorDto> getAll() {
-        return doctorRepository.findAll().stream()
-                .map(p -> modelMapper.map(p, DoctorDto.class))
-                .collect(Collectors.toList());
+    public Page<DoctorDto> getAll(Pageable pageable) {
+        return doctorRepository.findAll(pageable)
+                .map(doctor -> modelMapper.map(doctor, DoctorDto.class));
     }
 
     public DoctorDto update(Long id, DoctorDto doctorDto) {
