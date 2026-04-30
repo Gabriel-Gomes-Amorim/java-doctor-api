@@ -6,7 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 
-import jakarta.persistence.EntityNotFoundException;
+import javadoctor.api.exceptions.DuplicateResourceException;
+import javadoctor.api.exceptions.ResourceNotFoundException;
 import javadoctor.api.modules.doctor.dto.DoctorDto;
 import javadoctor.api.modules.doctor.entity.Doctor;
 import javadoctor.api.modules.doctor.repository.DoctorRepository;
@@ -22,15 +23,20 @@ public class DoctorService {
     private ModelMapper modelMapper;
 
     public DoctorDto create(DoctorDto doctorDto) {
+        if (doctorRepository.existsByEmail(doctorDto.getEmail()))
+            throw new DuplicateResourceException("Doctor", "email");
+
+        if (doctorRepository.existsByCrm(doctorDto.getCrm()))
+            throw new DuplicateResourceException("Doctor", "crm");
+
         Doctor doctor = modelMapper.map(doctorDto, Doctor.class);
         doctor.setActive(true);
-        Doctor createdDoctor = doctorRepository.save(doctor);
-        return modelMapper.map(createdDoctor, DoctorDto.class);
+        return modelMapper.map(doctorRepository.save(doctor), DoctorDto.class);
     }
 
     public DoctorDto getById(Long id) {
         Doctor doctor = doctorRepository.findById(id)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor"));
 
         return modelMapper.map(doctor, DoctorDto.class);
     }
@@ -42,7 +48,7 @@ public class DoctorService {
 
     public DoctorDto update(Long id, DoctorDto doctorDto) {
         Doctor doctor = doctorRepository.findById(id)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor"));
 
         doctor.setName(doctorDto.getName());
         doctor.setEmail(doctorDto.getEmail());
@@ -58,7 +64,8 @@ public class DoctorService {
 
     public void delete(Long id) {
         Doctor doctor = doctorRepository.findById(id)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor"));
+
         doctorRepository.delete(doctor);
     }
 }
