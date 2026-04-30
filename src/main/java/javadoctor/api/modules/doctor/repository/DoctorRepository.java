@@ -5,4 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import javadoctor.api.modules.doctor.entity.Doctor;
 
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
+    boolean existsByEmail(String email);
+
+    boolean existsByCrm(String crm);
 }
